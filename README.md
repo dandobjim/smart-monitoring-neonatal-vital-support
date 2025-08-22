@@ -1,12 +1,45 @@
 # Smart Monitoring System for Neonatal Vital Signs
+
 ## 📌 Overview
-This project aims to design and implement a smart real-time monitoring system for **neonatal vital signs**, using biometric sensors to measure **body temperature,** **heart rate** and some other relevants measures. The solution is focused on neonatal intensive care units (NICUs), enhancing early detection of critical conditions by continuously analyzing sensor data and generating alerts when vital signs go out of safe thresholds.
+
+This project aims to design and implement a smart real-time monitoring system for **neonatal vital signs**, using
+biometric sensors to measure **body temperature,** **heart rate** and some other relevants measures. The solution is
+focused on neonatal intensive care units (NICUs), enhancing early detection of critical conditions by continuously
+analyzing sensor data and generating alerts when vital signs go out of safe thresholds.
+
+---
+
+## 🛠️ Installation
+
+### Development Environment Setup
+
+1. Install poetry dependencies:
+   ```bash
+   poetry install
+   ```
+2. Activate the virtual environment:
+   ```bash
+    poetry shell
+    ```
+3. Install pre-commit hooks:
+   ```bash
+   pre-commit install
+   ```
+4. Run tests to ensure everything is set up correctly:
+   ```bash
+    pytest
+    ```
+5. Start the development server:
+   ```bash
+   uvicorn app.main:app --reload
+   ```
 
 ---
 
 ## 📖 Research
+
 | Condition                                                      | Vital signs monitored                                           | Main treatments / measures                                                                              | References                                                                                                                                                                                                                                                                                                                    |
-| -------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|----------------------------------------------------------------|-----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Respiratory Distress Syndrome (RDS)**                        | Respiratory rate, oxygen saturation, heart rate, blood pressure | Ventilatory support (CPAP, mechanical ventilation), exogenous surfactant, thermal control               | [(Baseer et al., 2020)](https://consensus.app/papers/risk-factors-of-respiratory-diseases-among-neonates-in-baseer-mohamed/c5f857a3c728536d8ede20200580d560), [(Cvetnic & Sills, 1992)](https://consensus.app/papers/8-neonatal-lung-disease-cvetnic-sills/fe270b6c97eb535bb9b28d19d195c64a/)                                 |
 | **Transient Tachypnea of the Newborn (TTN)**                   | RR, O₂ saturation, BP                                           | Oxygen therapy, nasal CPAP, fluid restriction                                                           | [(Baseer et al., 2020)](https://consensus.app/papers/risk-factors-of-respiratory-diseases-among-neonates-in-baseer-mohamed/c5f857a3c728536d8ede20200580d560)                                                                                                                                                                  |
 | **Neonatal Pneumonia**                                         | RR, temperature, O₂, BP                                         | Antibiotics, ventilatory support, IV fluids                                                             | [(Baseer et al., 2020)](https://consensus.app/papers/risk-factors-of-respiratory-diseases-among-neonates-in-baseer-mohamed/c5f857a3c728536d8ede20200580d560), [(Shrestha, 2020)](https://consensus.app/papers/neonatal-admission-from-emergency-department-shrestha/4f8d1a3ac4b15ce7a97cdde81d5b7fe3/)                        |
