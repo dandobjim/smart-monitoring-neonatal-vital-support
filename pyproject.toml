@@ -4,11 +4,12 @@ version = "0.1.0"
 description = "This project develops a smart real-time neonatal monitoring system using biometric sensors for temperature, heart rate, and other key measures, enabling early detection of critical conditions in NICUs through continuous data analysis and alert generation when thresholds are exceeded."
 authors = ["ddoblas <dandobjim@gmail.com>"]
 readme = "README.md"
-License = "Apache-2.0"
+license = "Apache-2.0"
 repository = "https://github.com/dandobjim/smart-monitoring-neonatal-vital-support"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pre-commit = "^4.3.0"
 
 
 [build-system]
