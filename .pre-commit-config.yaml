@@ -3,6 +3,7 @@ repos:
     rev: 25.1.0
     hooks:
     -   id: black
+        exclude: ^(database/alembic/|database/data/|tests/data/)
 
 - repo: https://github.com/PyCQA/flake8
   rev: 6.1.0
