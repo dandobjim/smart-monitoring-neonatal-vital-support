@@ -77,6 +77,12 @@ analyzing sensor data and generating alerts when vital signs go out of safe thre
 
 ---
 
+## 💽 Database Diagram
+
+<img src="./docs/imgs/database_diagram.png" alt="Database Diagram" width="50%" />
+
+---
+
 ## 🚀 Future Extensions
 
 - Predictive models for sepsis or apnea detection
