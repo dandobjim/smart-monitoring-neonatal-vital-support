@@ -3,13 +3,14 @@ repos:
     rev: 25.1.0
     hooks:
     -   id: black
-        exclude: ^(database/alembic/|database/data/|tests/data/)
+        exclude: ^(database/alembic/|database/data/|tests/data/|.*\.properties$)
 
 - repo: https://github.com/PyCQA/flake8
   rev: 6.1.0
   hooks:
   - id: flake8
     args: [--max-line-length=120]
+    exclude: ^(database/alembic/|database/data/|tests/data/|.*\.properties$)
 
 - repo: local
   hooks:
