@@ -278,3 +278,6 @@ poetry.lock
 
 # Data
 database/data/**
+
+# Mac
+.DS_Store
