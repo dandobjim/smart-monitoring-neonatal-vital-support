@@ -77,7 +77,13 @@ analyzing sensor data and generating alerts when vital signs go out of safe thre
 
 ---
 
-## 💽 Database Diagram
+## Diagrams
+
+### 🏗️ System Architecture
+
+<img src="./docs/imgs/diagram.svg" alt="System Architecture" width="70%" />
+
+### 💽 Database Diagram
 
 <img src="./docs/imgs/database_diagram.png" alt="Database Diagram" width="50%" />
 
