@@ -1,0 +1,50 @@
+{
+  "type": "record",
+  "name": "VitalSigns",
+  "fields": [
+    {
+      "name": "patient_id",
+      "type": "int"
+    },
+    {
+      "name": "heart_rate",
+      "type": "int"
+    },
+    {
+      "name": "blood_pressure_systolic",
+      "type": "int"
+    },
+    {
+      "name": "blood_pressure_diastolic",
+      "type": "int"
+    },
+    {
+      "name": "respiratory_rate",
+      "type": "int"
+    },
+    {
+      "name": "temperature",
+      "type": "float"
+    },
+    {
+      "name": "blood_glucose",
+      "type": "float"
+    },
+    {
+      "name": "serum_bilirubin",
+      "type": "float"
+    },
+    {
+      "name": "murmurs",
+      "type": "boolean"
+    },
+    {
+      "name": "abdominal_signs",
+      "type": "boolean"
+    },
+    {
+      "name": "timestamp",
+      "type": "long"
+    }
+  ]
+}
