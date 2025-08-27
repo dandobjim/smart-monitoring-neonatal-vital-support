@@ -1,4 +1,5 @@
 import random
+import time
 
 from faker import Faker
 
@@ -23,4 +24,5 @@ class VitalSignsSimulator:
             serum_bilirubin=round(random.uniform(4.0, 16.0), 1),
             murmurs=self.fake.boolean(chance_of_getting_true=10),
             abdominal_signs=self.fake.boolean(chance_of_getting_true=10),
+            timestamp=int(time.time() * 1000),
         )

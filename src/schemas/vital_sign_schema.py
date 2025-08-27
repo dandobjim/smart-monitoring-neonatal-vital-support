@@ -14,3 +14,4 @@ class VitalSignSchema:
     serum_bilirubin: Optional[float]
     murmurs: Optional[bool]
     abdominal_signs: Optional[bool]
+    timestamp: int

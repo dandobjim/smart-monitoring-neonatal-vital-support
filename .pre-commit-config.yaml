@@ -16,10 +16,10 @@ repos:
   hooks:
     - id: pytest
       name: pytest
-      entry: pytest
+      entry: bash -c 'PYTHONPATH=.' pytest
       language: system
       types: [ python ]
-      include: ^tests/
+      include: ^tests/.*\.py$
       args: [ --maxfail=1, --disable-warnings, -q ]
 
 -   repo: https://github.com/pre-commit/pre-commit-hooks

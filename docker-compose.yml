@@ -14,7 +14,7 @@ services:
       - 9092:9092                 # Kafka Broker
 
   postgres-db:
-    image: postgres
+    image: postgres:12
     restart: always
     shm_size: 128mb
     ports:
