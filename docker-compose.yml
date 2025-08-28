@@ -1,22 +1,65 @@
 version: '3.7'
 
 services:
-  kafka-cluster:
-    image: landoop/fast-data-dev:cp3.3.0
+  # 1. Zookeeper: Required by Kafka to manage the cluster
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.0
+    container_name: zookeeper
     environment:
-      ADV_HOST: 127.0.0.1         # Change to 192.168.99.100 if using Docker Toolbox or 127.0.0.1 for docker
-      RUNTESTS: 0                 # Disable Running tests so the cluster starts faster
-    ports:
-      - 2181:2181                 # Zookeeper
-      - 3030:3030                 # Landoop UI
-      - 8081-8083:8081-8083       # REST Proxy, Schema Registry, Kafka Connect ports
-      - 9581-9585:9581-9585       # JMX Ports
-      - 9092:9092                 # Kafka Broker
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
 
+  # 2. Kafka: The messaging broker where changes will be published
+  kafka:
+    image: confluentinc/cp-kafka:7.3.0
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092" # Port for your applications to connect to Kafka
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  # 3. Kafka Connect: The service that will run the Debezium connector
+  connect:
+    image: debezium/connect:2.7.3.Final
+    container_name: connect
+    ports:
+      - "8083:8083" # Port for the Kafka Connect REST API
+    depends_on:
+      - kafka
+      - postgres-db
+    environment:
+      BOOTSTRAP_SERVERS: 'kafka:29092' # Connects to the 'kafka' service inside Docker
+      GROUP_ID: 1
+      CONFIG_STORAGE_TOPIC: my_connect_configs
+      OFFSET_STORAGE_TOPIC: my_connect_offsets
+      STATUS_STORAGE_TOPIC: my_connect_statuses
+    volumes:
+      - ./kafka-connect-plugins:/kafka/connect/plugins
+
+  # 4. Schema Registry: Manages Avro schemas for Kafka topics
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.3.0
+    container_name: schema-registry
+    depends_on:
+      - kafka
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'kafka:29092'
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+
+  # 5. PostgreSQL: Your database, now with the command for wal_level
   postgres-db:
     image: postgres:12
+    container_name: postgres-db # Given a container name for clarity
     restart: always
-    shm_size: 128mb
     ports:
       - "5432:5432"
     environment:
@@ -25,8 +68,9 @@ services:
       POSTGRES_DB: neonatal
     volumes:
       - ./database/data:/var/lib/postgresql/data
+    command: postgres -c wal_level=logical
 
-
+  # 6. Adminer: Your tool to manage the database
   adminer:
     image: adminer
     restart: always

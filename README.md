@@ -25,11 +25,22 @@ analyzing sensor data and generating alerts when vital signs go out of safe thre
    ```bash
    pre-commit install
    ```
-4. Run tests to ensure everything is set up correctly:
+
+4. Run docker containers:
+   ```bash
+   docker-compose up -d --build
+   ```
+
+5. Apply database migrations:
+   ```bash
+   alembic upgrade head
+   ```
+
+6. Run tests to ensure everything is set up correctly:
    ```bash
     pytest
     ```
-5. Start the development server:
+7. Start the development server:
    ```bash
    uvicorn app.main:app --reload
    ```
@@ -52,8 +63,9 @@ analyzing sensor data and generating alerts when vital signs go out of safe thre
 | **Necrotizing Enterocolitis (NEC)**                            | HR, temperature, O₂, BP, abdominal signs                        | Stop oral feeds, antibiotics, parenteral nutrition, surgery if severe                                   | [(Gheorghe & Bhandari, 2015)](https://consensus.app/papers/stem-cell-therapy-in-neonatal-diseases-gheorghe-bhandari/ab59785634e657ddaec27feefd3cda47/)                                                                                                                                                                        |
 
 ### Standard NICU Measurements and Units
+
 | Parameter / Vital Sign         | Unit of Measurement                                               | Normal Reference Range (Term Neonates)                                |
-| ------------------------------ | ----------------------------------------------------------------- | --------------------------------------------------------------------- |
+|--------------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------|
 | **Heart Rate (HR)**            | Beats per minute (bpm)                                            | 100–180 bpm                                                           |
 | **Respiratory Rate (RR)**      | Breaths per minute (breaths/min)                                  | 30–60 breaths/min                                                     |
 | **Oxygen Saturation (SpO₂)**   | Percentage (%)                                                    | 90–95% (varies with gestational age and condition)                    |
